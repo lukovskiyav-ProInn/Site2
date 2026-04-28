@@ -10,7 +10,6 @@
 <meta property="og:title" content="ПроектИнновации — Проектная компания">
 <meta property="og:description" content="Комплексное проектирование объектов жилого, общественного и производственного назначения">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://via.placeholder.com/1200x630?text=ProektInnovatsii">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -62,7 +61,7 @@ section{padding:5rem 2.5rem}
 .sec-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.8rem;padding-bottom:1rem;border-bottom:0.5px solid var(--line)}
 .sec-title{font-family:'Unbounded',sans-serif;font-weight:200;font-size:1.1rem}
 
-/* Projects grid */
+/* Projects grid - Ч/Б с цветом при наведении */
 .proj-loading, .proj-grid{transition:opacity 0.3s ease}
 .proj-loading{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
 .skel{background:linear-gradient(90deg,#1e1e1c 25%,#2a2a28 50%,#1e1e1c 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;height:360px}
@@ -72,8 +71,9 @@ section{padding:5rem 2.5rem}
 .proj-card{overflow:hidden;position:relative;background:#2a2a28;cursor:pointer;transition:transform 0.2s}
 .proj-card:active{transform:scale(0.98)}
 .proj-img-wrap{height:300px;overflow:hidden;position:relative;background:#1e1e1c}
-.proj-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.3s;filter:brightness(0.95)}
-.proj-card:hover img{transform:scale(1.04);filter:brightness(1)}
+/* ОСНОВНЫЕ СТИЛИ ДЛЯ ЭФФЕКТА Ч/Б → ЦВЕТ */
+.proj-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s ease-in-out;filter:grayscale(100%) brightness(0.95)}
+.proj-card:hover img{transform:scale(1.04);filter:grayscale(0%) brightness(1)}
 .proj-img-wrap img.error-placeholder{object-fit:contain;padding:20px;background:#141412}
 .proj-info{padding:1rem 1rem 0.8rem;background:var(--bg)}
 .proj-cat{font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
@@ -101,9 +101,9 @@ section{padding:5rem 2.5rem}
 .modal-counter{position:absolute;bottom:1rem;right:2rem;font-size:11px;letter-spacing:0.08em;color:rgba(248,246,241,0.3);font-family:'Unbounded',sans-serif;font-weight:200;z-index:3}
 
 /* About */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.about-img{height:480px;overflow:hidden;background:#2a2a28}
-.about-img img{width:100%;height:100%;object-fit:cover;display:block}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-img{width:100%;overflow:hidden;background:#2a2a28}
+.about-img img{width:100%;height:auto;display:block}
 .about-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
 .about-body{font-family:'Unbounded',sans-serif;font-weight:200;font-size:1.05rem;line-height:1.6;margin-bottom:1.8rem}
 .about-desc{color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:2rem}
@@ -144,7 +144,8 @@ footer a:hover{color:var(--gold)}
 @media(max-width:768px){
   .proj-grid,.proj-loading{grid-template-columns:1fr 1fr}
   .about-grid{grid-template-columns:1fr;gap:2rem}
-  .about-img{height:320px}
+  .about-img{height:auto;max-height:400px}
+  .about-img img{height:auto;width:100%}
   .srv-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr;gap:2rem}
   nav{padding:0 1.2rem}
@@ -165,7 +166,7 @@ footer a:hover{color:var(--gold)}
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 
-/* Accessibility focus styles */
+/* Accessibility */
 a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
@@ -303,7 +304,8 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     <div>
       <div class="about-label">О компании</div>
       <p class="about-body">Точное проектирование — от концепции до авторского надзора</p>
-      <p class="about-desc">Компания, основанная в 2013 году и предоставляющая полный спектр услуг с междисциплинарным взаимодействием в единой BIM-среде. Компетенции и опыт команды из архитекторов, конструкторов, инженеров и руководителей проектов позволили компании добиться высокого уровня в области генпроектирования, а нашим клиентам — экономить время и средства, достигая максимально эффективного результата на всех этапах реализации проекта. За время существования на рынке нашей командой спроектировано более 100 объектов, в том числе промышленные, жилые и общественные комплексы, получившие признание как у профессионалов рынка, так и у жителей города. Кропотливая работа с командой клиента, объективная оценка технического задания на проектирование, применение современных научных разработок в области строительной климатологии, расчётных модулей для инженеров, конструкторов и архитекторов, оптимизация и соблюдение бюджета и сроков — это то, что позволяет нам разрабатывать качественный продукт, задающий новые стандарты качества.</p>
+      <p class="about-desc">Компания, основанная в 2013 году и предоставляющая полный спектр услуг с междисциплинарным взаимодействием в единой BIM-среде. Компетенции и опыт команды из архитекторов, конструкторов, инженеров и руководителей проектов позволили компании добиться высокого уровня в области генпроектирования, а нашим клиентам — экономить время и средства, достигая максимально эффективного результата на всех этапах реализации проекта. 
+      <p class="about-desc">За время существования на рынке нашей командой спроектировано более 100 объектов, в том числе промышленные, жилые и общественные комплексы, получившие признание как у профессионалов рынка, так и у жителей города. Кропотливая работа с командой клиента, объективная оценка технического задания на проектирование, применение современных научных разработок в области строительной климатологии, расчётных модулей для инженеров, конструкторов и архитекторов, оптимизация и соблюдение бюджета и сроков — это то, что позволяет нам разрабатывать качественный продукт, задающий новые стандарты качества.</p>
       <p class="about-desc">Мы работаем на всех стадиях: от концепции и эскизного проекта до рабочей документации и авторского надзора за строительством.</p>
       <a class="btn" href="mailto:info@pro-inn.ru">Написать нам</a>
     </div>
@@ -325,7 +327,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   <div class="contact-grid fade-in">
     <div>
       <h2 class="contact-hl">Давайте обсудим ваш проект</h2>
-      <p class="contact-desc">Расскажите нам о вашей идее — ответим в течение одного рабочего дня и назначим встречу.</p>
+      <p class="contact-desc">Расскажите нам о вашей идее — ответим в течение рабочего дня и назначим встречу.</p>
       <a class="btn-light" href="mailto:info@pro-inn.ru">Написать нам →</a>
     </div>
     <div>
@@ -353,7 +355,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   let projects = [];
   let curProject = 0, curImg = 0;
 
-  // Safe image URL generator
   function imgUrl(id, size = 1200) {
     if (!id || typeof id !== 'string') return FALLBACK_IMG;
     const safeId = id.replace(/[^a-zA-Z0-9_-]/g, '');
@@ -361,7 +362,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     return `https://drive.google.com/thumbnail?id=${safeId}&sz=w${size}`;
   }
 
-  // Load projects from Google Sheets
   async function loadProjects() {
     try {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -389,7 +389,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
-  // Render projects grid
   function renderProjects() {
     const loadingEl = document.getElementById('proj-loading');
     const grid = document.getElementById('proj-grid');
@@ -420,7 +419,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
-  // Simple escape for XSS prevention
   function escapeHtml(str) {
     if(!str) return '';
     return str.replace(/[&<>]/g, function(m) {
@@ -431,7 +429,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     });
   }
 
-  // Gallery functions
   window.galleryOpen = function(idx) {
     curProject = idx;
     curImg = 0;
@@ -497,7 +494,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
-  // Load about image from separate sheet
   async function loadAboutImage() {
     try {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('О компании')}`;
@@ -518,7 +514,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
-  // Intersection Observer for fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting) entry.target.classList.add('visible');
@@ -526,7 +521,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // Active navigation highlighting
   function updateActiveNav() {
     const sections = ['projects', 'about', 'services', 'contact'];
     const scrollPos = window.scrollY + 100;
@@ -545,7 +539,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     });
   }
 
-  // Burger menu
   const burger = document.getElementById('burgerBtn');
   const navLinks = document.getElementById('navLinks');
   if(burger && navLinks) {
@@ -553,7 +546,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
       const isOpen = navLinks.classList.toggle('open');
       burger.setAttribute('aria-expanded', isOpen);
     });
-    // Close menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -562,7 +554,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     });
   }
 
-  // Keyboard and modal event listeners
   document.addEventListener('keydown', e => {
     const modal = document.getElementById('modal');
     if(modal && modal.classList.contains('open')) {
@@ -579,7 +570,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     if(closeBtn) closeBtn.addEventListener('click', window.closeGallery);
   }
 
-  // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -596,7 +586,6 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   window.addEventListener('scroll', updateActiveNav);
   updateActiveNav();
   
-  // Initialize
   loadProjects();
   loadAboutImage();
 })();
