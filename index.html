@@ -210,6 +210,31 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
         gap: 0.8rem;
     }
 }
+  /* Telegram link in contacts */
+.contact-telegram {
+    margin-top: 0.2rem;
+}
+
+.telegram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: rgba(248, 246, 241, 0.8);
+    transition: color 0.2s, transform 0.2s;
+}
+
+.telegram-icon {
+    transition: transform 0.2s;
+}
+
+.telegram-link:hover {
+    color: var(--gold);
+}
+
+.telegram-link:hover .telegram-icon {
+    transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -346,16 +371,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
       <p class="about-desc">Компания, основанная в 2013 году и предоставляющая полный спектр услуг с междисциплинарным взаимодействием в единой BIM-среде. Компетенции и опыт команды из архитекторов, конструкторов, инженеров и руководителей проектов позволили компании добиться высокого уровня в области генпроектирования, а нашим клиентам — экономить время и средства, достигая максимально эффективного результата на всех этапах реализации проекта. 
       <p class="about-desc">За время существования на рынке нашей командой спроектировано более 100 объектов, в том числе промышленные, жилые и общественные комплексы, получившие признание как у профессионалов рынка, так и у жителей города. Кропотливая работа с командой клиента, объективная оценка технического задания на проектирование, применение современных научных разработок в области строительной климатологии, расчётных модулей для инженеров, конструкторов и архитекторов, оптимизация и соблюдение бюджета и сроков — это то, что позволяет нам разрабатывать качественный продукт, задающий новые стандарты качества.</p>
       <p class="about-desc">Мы работаем на всех стадиях: от концепции и эскизного проекта до рабочей документации и авторского надзора за строительством.</p>
-      
-      <!-- Контакты -->
-      <div class="about-contacts">
-        <a class="btn" href="mailto:info@pro-inn.ru">📧 Написать нам</a>
-        <div class="contact-links">
-          <a href="https://t.me/proinn_gip" class="contact-icon" target="_blank" rel="noopener noreferrer">📨 Telegram</a>
-          <a href="mailto:info@pro-inn.ru" class="contact-icon">✉️ info@pro-inn.ru</a>
-        </div>
-      </div>
-      
+      <a class="btn" href="mailto:info@pro-inn.ru">Написать нам</a>
     </div>
   </div>
 </section>
@@ -375,14 +391,31 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   <div class="contact-grid fade-in">
     <div>
       <h2 class="contact-hl">Давайте обсудим ваш проект</h2>
-      <p class="contact-desc">Расскажите нам о вашей идее — ответим в течение рабочего дня и назначим встречу.</p>
+      <p class="contact-desc">Расскажите нам о вашей идее — ответим в течение одного рабочего дня и назначим встречу.</p>
       <a class="btn-light" href="mailto:info@pro-inn.ru">Написать нам →</a>
     </div>
     <div>
-      <div class="clabel">Адрес</div><div class="cval">Ростов-на-Дону, ул. 19-Линия, д. 5 стр. 2</div>
-      <div class="clabel">Телефон</div><div class="cval"><a href="tel:+79054267206">+7 (905) 426-72-06</a></div>
-      <div class="clabel">Электронная почта</div><div class="cval"><a href="mailto:info@pro-inn.ru">info@pro-inn.ru</a></div>
-      <div class="clabel">Режим работы</div><div class="cval">Пн–Пт: 9:00 — 19:00</div>
+      <div class="clabel">Адрес</div>
+      <div class="cval">Ростов-на-Дону, ул. 19-Линия, д. 5 стр. 2</div>
+      
+      <div class="clabel">Телефон</div>
+      <div class="cval"><a href="tel:+79054267206">+7 (905) 426-72-06</a></div>
+      
+      <div class="clabel">Telegram</div>
+      <div class="cval contact-telegram">
+        <a href="https://t.me/proinn_gip" target="_blank" rel="noopener noreferrer" class="telegram-link">
+          <svg class="telegram-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.2643 2.42771C22.0443 2.16771 21.7043 2.02771 21.3643 2.08771C20.9843 2.14771 2.20434 7.30771 1.69434 7.50771C1.13434 7.74771 0.774335 8.18771 0.804335 8.64771C0.834335 9.10771 1.27434 9.44771 1.79434 9.58771L6.72434 11.0877L9.32434 17.7277C9.50434 18.1877 9.92434 18.4477 10.3843 18.4477C10.4843 18.4477 10.5843 18.4377 10.6843 18.4077C11.2043 18.2477 13.6343 17.2877 18.5543 14.7477C18.9943 14.5277 19.2343 14.0877 19.2243 13.6277C19.2143 13.1677 18.9443 12.7277 18.5143 12.5277C16.9443 11.7877 10.2043 8.62771 8.95434 8.06771C8.53434 7.88771 8.23434 7.72771 8.05434 7.48771C7.87434 7.24771 7.81434 6.94771 7.91434 6.62771C8.01434 6.30771 8.89434 3.48771 9.41434 1.84771C9.51434 1.52771 9.47434 1.20771 9.27434 0.967714C9.07434 0.727714 8.77434 0.607714 8.47434 0.647714C7.69434 0.767714 2.43434 1.46771 1.93434 1.56771C1.80434 1.58771 0.864335 1.82771 0.864335 1.82771C0.424335 1.94771 0.0743353 2.24771 0.0143353 2.66771C-0.0456647 3.08771 0.194335 3.50771 0.604335 3.66771C2.78434 4.54771 19.3843 11.9477 21.3243 12.7677C21.7043 12.9277 22.1343 12.9077 22.4643 12.7077C22.7943 12.5077 22.9743 12.1477 22.9943 11.7677C23.0143 11.3877 22.9943 7.34771 22.9943 3.92771C23.0143 3.36771 22.8843 2.84771 22.6443 2.46771L22.2643 2.42771Z" fill="currentColor"/>
+          </svg>
+          @proinn_gip
+        </a>
+      </div>
+      
+      <div class="clabel">Электронная почта</div>
+      <div class="cval"><a href="mailto:info@pro-inn.ru">info@pro-inn.ru</a></div>
+      
+      <div class="clabel">Режим работы</div>
+      <div class="cval">Пн–Пт: 9:00 — 19:00</div>
     </div>
   </div>
 </section>
