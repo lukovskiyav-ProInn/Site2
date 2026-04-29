@@ -35,19 +35,70 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 2.5rem
 .burger:hover{opacity:0.7}
 
 /* Hero */
-.hero{position:relative;height:100vh;margin-top:52px;overflow:hidden;background:#141412}
-@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.s{opacity:0;animation:rise 0.12s ease forwards}
-.s0{animation-delay:.1s}.s1{animation-delay:.17s}.s2{animation-delay:.24s}
-.s3{animation-delay:.31s}.s4{animation-delay:.38s}.s5{animation-delay:.45s}.s6{animation-delay:.52s}
-.s7{animation-delay:.59s}.s8{animation-delay:.66s}.s9{animation-delay:.73s}.s10{animation-delay:.8s}
-.s11{animation-delay:.87s}.s12{animation-delay:.94s}.s13{animation-delay:1.01s}.s14{animation-delay:1.08s}.s15{animation-delay:1.15s}
-.s16{animation-delay:1.22s}.s17{animation-delay:1.29s}.s18{animation-delay:1.36s}
-.s19{animation-delay:1.43s}.s20{animation-delay:1.5s}.s21{animation-delay:1.57s}
-.logo-name{opacity:0;animation:rise 0.5s ease 1.7s forwards}
-.logo-sub{opacity:0;animation:rise 0.5s ease 1.9s forwards}
-.bot{opacity:0;animation:fadeIn 0.5s ease 2.1s forwards}
+<div class="hero" style="position: relative; overflow: hidden;">
+  <!-- Ваша фоновая картинка -->
+  <img src="ССЫЛКА_НА_ВАШУ_КАРТИНКУ" alt="Фон" style="width:100%; height:100%; object-fit:cover; position: absolute; top:0; left:0; z-index:0;">
+  
+  <!-- Затемняющий слой (чтобы текст читался лучше) -->
+  <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); z-index:1;"></div>
+  
+  <!-- Анимированный SVG поверх картинки -->
+  <svg width="100%" height="100%" viewBox="0 0 680 382" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top:0; left:0; z-index:2; opacity:0.35;">
+    <!-- Оставляем только анимированные элементы и текст -->
+    <rect width="680" height="382" fill="transparent"/>
+    
+    <!-- Сетка -->
+    <g stroke="#1e1e1a" stroke-width="0.5" opacity="0.5">
+      <line x1="0" y1="60" x2="680" y2="60"/><line x1="0" y1="120" x2="680" y2="120"/>
+      <line x1="0" y1="180" x2="680" y2="180"/><line x1="0" y1="240" x2="680" y2="240"/>
+      <line x1="0" y1="300" x2="680" y2="300"/><line x1="0" y1="360" x2="680" y2="360"/>
+      <line x1="80" y1="0" x2="80" y2="382"/><line x1="160" y1="0" x2="160" y2="382"/>
+      <line x1="240" y1="0" x2="240" y2="382"/><line x1="320" y1="0" x2="320" y2="382"/>
+      <line x1="400" y1="0" x2="400" y2="382"/><line x1="480" y1="0" x2="480" y2="382"/>
+      <line x1="560" y1="0" x2="560" y2="382"/><line x1="640" y1="0" x2="640" y2="382"/>
+    </g>
+    
+    <!-- Анимированные прямоугольники (те самые s0-s21) -->
+    <g transform="translate(312.5,136.5) scale(0.115)" opacity="0.6">
+      <rect class="s s0" x="43" y="30" width="14" height="440" fill="#F0EDE8"/>
+      <rect class="s s1" x="85" y="30" width="14" height="440" fill="#F0EDE8"/>
+      <rect class="s s2" x="43" y="30" width="56" height="14" fill="#F0EDE8"/>
+      <rect class="s s3" x="113" y="240" width="14" height="230" fill="#F0EDE8"/>
+      <rect class="s s4" x="113" y="240" width="56" height="14" fill="#F0EDE8"/>
+      <rect class="s s5" x="155" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s6" x="113" y="352" width="56" height="14" fill="#F0EDE8"/>
+      <rect class="s s7" x="183" y="240" width="56" height="14" fill="#F0EDE8"/>
+      <rect class="s s8" x="183" y="352" width="56" height="14" fill="#F0EDE8"/>
+      <rect class="s s9" x="183" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s10" x="225" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s11" x="253" y="30" width="14" height="440" fill="#b8a882"/>
+      <rect class="s s12" x="295" y="30" width="14" height="440" fill="#b8a882"/>
+      <polygon class="s s13" points="295,30 309,30 267,470 253,470" fill="#b8a882"/>
+      <rect class="s s14" x="295" y="30" width="14" height="32" fill="#b8a882"/>
+      <rect class="s s15" x="253" y="438" width="14" height="32" fill="#b8a882"/>
+      <rect class="s s16" x="323" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s17" x="365" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s18" x="323" y="289" width="56" height="14" fill="#F0EDE8"/>
+      <rect class="s s19" x="393" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s20" x="435" y="240" width="14" height="126" fill="#F0EDE8"/>
+      <rect class="s s21" x="393" y="289" width="56" height="14" fill="#F0EDE8"/>
+    </g>
+    
+    <!-- Текст с анимацией -->
+    <text class="logo-name" x="340" y="210" font-family="'Unbounded',sans-serif" font-weight="200" font-size="11" letter-spacing="5" fill="rgba(240,237,232,0.95)" text-anchor="middle" style="z-index:10;">ПроектИнновации</text>
+    
+    <g class="bot">
+      <line x1="0" y1="362" x2="680" y2="362" stroke="rgba(248,246,241,0.15)" stroke-width="0.5"/>
+      <text x="30" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(248,246,241,0.45)">ОСНОВАНА В 2013 ГОДУ</text>
+      <text x="650" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(248,246,241,0.45)" text-anchor="end">100+ РЕАЛИЗОВАННЫХ ПРОЕКТОВ</text>
+    </g>
+  </svg>
+  
+  <!-- Текст поверх всего (дублируем на всякий случай) -->
+  <div style="position: absolute; bottom: 1.5rem; left: 0; right: 0; text-align: center; z-index: 3;">
+    <div style="font-size: 9px; letter-spacing: 4px; color: rgba(248,246,241,0.5); font-family:'Unbounded',sans-serif;">ПРОЕКТНАЯ КОМПАНИЯ</div>
+  </div>
+</div>
 
 /* Stats */
 .stats-bar{display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--line);background:var(--bg)}
