@@ -54,9 +54,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 2.5rem
 @media(max-width:600px){.hero-svg-logo svg{width:100vw}}
 
 /* Hero image layer */
-.hero-img-wrap{position:absolute;inset:0;z-index:0}
-.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;opacity:0;transition:opacity 1s ease, transform 8s ease-out;transform:scale(1.06)}
-.hero-img-wrap img.loaded{opacity:1;transform:scale(1)}
+.hero-img-wrap{position:absolute;inset:0;z-index:0;background:#141412}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;opacity:0;transition:opacity 1.2s ease;transform:scale(1.04)}
+.hero-img-wrap img.loaded{opacity:1}
 .hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,12,10,0.35) 0%,rgba(12,12,10,0.1) 40%,rgba(12,12,10,0.55) 80%,rgba(12,12,10,0.85) 100%)}
 
 /* Hero content overlay */
@@ -506,55 +506,51 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   }
 
   // ─── HERO IMAGE ───────────────────────────────────────────────────────────
-  // Ожидаемая структура листа «Главная» в Google Таблице:
-  //   Колонка A — ID файла из Google Drive (только ID, без ссылки)
-  //
-  // Пример ссылки: https://drive.google.com/file/d/FILE_ID_HERE/view
-  // В ячейку A1 вставьте только: FILE_ID_HERE
-  // Файл должен быть открыт для просмотра по ссылке.
+  // Лист «Главная» в Google Таблице, ячейка A1 — ID файла из Google Drive.
+  // Пример: https://drive.google.com/file/d/➡️ВОТ_ЭТО_ID⬅️/view
+  // Файл должен быть открыт «для всех по ссылке».
   // ──────────────────────────────────────────────────────────────────────────
   async function loadHeroImage() {
     const imgEl = document.getElementById('hero-bg-img');
     if (!imgEl) return;
 
-    const showImg = (src) => {
-      imgEl.onload = () => {
-        imgEl.classList.add('loaded');
-        initHeroParallax(imgEl);
-      };
-      imgEl.onerror = () => { imgEl.style.opacity = '0'; };
-      imgEl.src = src;
+    const revealImg = () => {
+      imgEl.classList.add('loaded');
+      initHeroParallax(imgEl);
     };
+
+    const tryLoad = (src) => new Promise((resolve, reject) => {
+      imgEl.onload  = () => resolve();
+      imgEl.onerror = () => reject(new Error('img load failed'));
+      imgEl.src = src;
+    });
 
     try {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Главная')}`;
-      const res = await fetch(url);
+      const res  = await fetch(url);
       const text = await res.text();
       const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
       const rows = json.table.rows;
 
-      if (rows && rows[0] && rows[0].c[0] && rows[0].c[0].v) {
-        const fileId = rows[0].c[0].v.trim().replace(/[^a-zA-Z0-9_-]/g, '');
-        if (!fileId) throw new Error('Пустой ID файла');
-        const w = window.innerWidth;
-        const size = w <= 480 ? 'w640' : w <= 1024 ? 'w1024' : 'w1920';
-        showImg(`https://drive.google.com/thumbnail?id=${fileId}&sz=${size}`);
-      } else {
-        throw new Error('Нет данных в листе');
-      }
+      if (!rows || !rows[0] || !rows[0].c[0] || !rows[0].c[0].v) throw new Error('Нет ID в листе «Главная»');
+
+      const fileId = rows[0].c[0].v.trim().replace(/[^a-zA-Z0-9_-]/g, '');
+      if (!fileId) throw new Error('Пустой ID');
+
+      const w    = window.innerWidth;
+      const size = w <= 480 ? 'w800' : w <= 1024 ? 'w1200' : 'w1920';
+      await tryLoad(`https://drive.google.com/thumbnail?id=${fileId}&sz=${size}`);
+      revealImg();
     } catch(e) {
-      console.warn('Hero: лист «Главная» не найден или недоступен.', e.message);
-      // Показываем архитектурное фото-заглушку пока лист не настроен
-      showImg('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80&auto=format&fit=crop');
+      console.warn('Hero image:', e.message);
+      // Фон остаётся тёмным — логотип читается в любом случае
     }
   }
 
   function initHeroParallax(imgEl) {
     window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      if (scrolled < window.innerHeight) {
-        imgEl.style.transform = `scale(1) translateY(${scrolled * 0.18}px)`;
-      }
+      const s = window.scrollY;
+      if (s < window.innerHeight) imgEl.style.transform = `scale(1.04) translateY(${s * 0.15}px)`;
     }, { passive: true });
   }
   // ──────────────────────────────────────────────────────────────────────────
