@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -40,7 +40,7 @@ body{
     overflow-x:hidden
 }
 
-/* Navigation — тёмная */
+/* Navigation */
 nav{
     position:fixed;
     top:0;
@@ -89,7 +89,6 @@ nav{
     opacity:0.6
 }
 
-/* Burger menu */
 .burger{
     display:none;
     background:none;
@@ -101,7 +100,7 @@ nav{
 }
 .burger:hover{opacity:0.7}
 
-/* ===== HERO С ФОНОВОЙ КАРТИНКОЙ (АДАПТИВНО, БЕЗ ОБРЕЗКИ) ===== */
+/* ===== HERO ===== */
 .hero{
     position:relative;
     height:100vh;
@@ -118,7 +117,7 @@ nav{
     object-fit:cover;
     object-position:center center;
     z-index:0;
-    filter:brightness(0.65) contrast(1.1);
+    filter:brightness(0.6) contrast(1.1);
 }
 .hero-overlay{
     position:absolute;
@@ -126,7 +125,7 @@ nav{
     left:0;
     width:100%;
     height:100%;
-    background:linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 100%);
+    background:linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 100%);
     z-index:1;
 }
 .hero-content{
@@ -142,9 +141,9 @@ nav{
 .hero-svg-container{
     position:relative;
     width:100%;
-    max-width:720px;
+    max-width:920px;
     margin:0 auto;
-    padding:0 1rem;
+    padding:0 1.5rem;
 }
 .hero-svg{
     width:100%;
@@ -152,7 +151,7 @@ nav{
     display:block;
 }
 
-/* Анимации для SVG элементов */
+/* Анимации */
 @keyframes rise{
     from{opacity:0;transform:translateY(8px)}
     to{opacity:1;transform:translateY(0)}
@@ -173,7 +172,7 @@ nav{
 .logo-name{opacity:0;animation:rise 0.5s ease 1.7s forwards}
 .bot{opacity:0;animation:fadeIn 0.5s ease 2.1s forwards}
 
-/* Stats — тёмная тема */
+/* Stats */
 .stats-bar{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -200,7 +199,7 @@ nav{
     color:var(--text-muted)
 }
 
-/* Sections — тёмный фон */
+/* Sections */
 section{
     padding:5rem 2.5rem;
     background:var(--dark-bg)
@@ -219,7 +218,7 @@ section{
     font-size:1.1rem
 }
 
-/* Projects grid */
+/* Projects */
 .proj-loading,.proj-grid{transition:opacity 0.3s ease}
 .proj-loading{
     display:grid;
@@ -280,15 +279,14 @@ section{
     font-family:'Unbounded',sans-serif;
     font-weight:300;
     font-size:0.82rem;
-    line-height:1.35;
-    margin-bottom:0.15rem
+    line-height:1.35
 }
 .proj-loc{
     font-size:11px;
     color:var(--text-muted)
 }
 
-/* Modal gallery (тёмная) */
+/* Modal */
 .modal{
     display:none;
     position:fixed;
@@ -340,8 +338,8 @@ section{
     z-index:1
 }
 .modal-img{
-    max-width:100%;
-    max-height:100%;
+    max-width:90%;
+    max-height:85vh;
     object-fit:contain;
     display:block;
     z-index:2
@@ -399,7 +397,7 @@ section{
     z-index:3
 }
 
-/* About — тёмная тема */
+/* About */
 .about-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -454,7 +452,7 @@ section{
     color:#121210
 }
 
-/* Services — тёмная тема */
+/* Services */
 .srv-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
@@ -488,7 +486,7 @@ section{
     line-height:1.7
 }
 
-/* Contact — тёмная секция */
+/* Contact */
 .contact-sec{
     background:var(--dark-surface);
     border-top:0.5px solid var(--border-dim)
@@ -621,6 +619,7 @@ footer a:hover{color:var(--gold)}
     .burger{display:block}
     section{padding:3rem 1.2rem}
     .stats-bar .stat{padding:1.2rem 1.2rem}
+    .hero-svg-container{max-width:95%}
 }
 @media(max-width:480px){
     .proj-grid,.proj-loading{grid-template-columns:1fr}
@@ -631,6 +630,7 @@ footer a:hover{color:var(--gold)}
     .modal-prev{left:0.5rem}
     .modal-next{right:0.5rem}
     footer{flex-direction:column;gap:0.5rem;text-align:center}
+    .hero-svg-container{max-width:100%}
 }
 </style>
 </head>
@@ -647,18 +647,15 @@ footer a:hover{color:var(--gold)}
   <button class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false">☰</button>
 </nav>
 
-<!-- HERO: фоновая картинка + анимированный SVG логотип -->
+<!-- HERO: фоновая картинка + увеличенный анимированный логотип -->
 <div class="hero">
-  <img class="hero-bg" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop" alt="Архитектурный фон строительный проект" crossorigin="anonymous">
+  <img class="hero-bg" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop" alt="Архитектурный фон" crossorigin="anonymous">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-svg-container">
-      <svg class="hero-svg" viewBox="0 0 680 382" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="Анимированный логотип компании">
-        <!-- Прозрачный фон (для SVG) -->
+      <svg class="hero-svg" viewBox="0 0 680 382" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
         <rect width="680" height="382" fill="transparent"/>
-        
-        <!-- Архитектурный знак — динамическая композиция -->
-        <g transform="translate(312.5,136.5) scale(0.115)">
+        <g transform="translate(312.5,136.5) scale(0.14)">
           <rect class="s s0" x="43" y="30" width="14" height="440" fill="#F0EDE8"/>
           <rect class="s s1" x="85" y="30" width="14" height="440" fill="#F0EDE8"/>
           <rect class="s s2" x="43" y="30" width="56" height="14" fill="#F0EDE8"/>
@@ -682,15 +679,11 @@ footer a:hover{color:var(--gold)}
           <rect class="s s20" x="435" y="240" width="14" height="126" fill="#F0EDE8"/>
           <rect class="s s21" x="393" y="289" width="56" height="14" fill="#F0EDE8"/>
         </g>
-        
-        <!-- Название компании с анимацией -->
-        <text class="logo-name" x="340" y="210" font-family="'Unbounded',sans-serif" font-weight="200" font-size="11" letter-spacing="5" fill="rgba(240,237,232,0.95)" text-anchor="middle">ПроектИнновации</text>
-        
-        <!-- Нижняя строка с информацией, анимация -->
+        <text class="logo-name" x="340" y="210" font-family="'Unbounded',sans-serif" font-weight="200" font-size="14" letter-spacing="6" fill="rgba(240,237,232,0.95)" text-anchor="middle">ПроектИнновации</text>
         <g class="bot">
           <line x1="0" y1="362" x2="680" y2="362" stroke="rgba(240,237,232,0.2)" stroke-width="0.5"/>
-          <text x="30" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(240,237,232,0.5)">ОСНОВАНА В 2013 ГОДУ</text>
-          <text x="650" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(240,237,232,0.5)" text-anchor="end">100+ РЕАЛИЗОВАННЫХ ПРОЕКТОВ</text>
+          <text x="30" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="6" letter-spacing="2.5" fill="rgba(240,237,232,0.5)">ОСНОВАНА В 2013 ГОДУ</text>
+          <text x="650" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="6" letter-spacing="2.5" fill="rgba(240,237,232,0.5)" text-anchor="end">100+ РЕАЛИЗОВАННЫХ ПРОЕКТОВ</text>
         </g>
       </svg>
     </div>
@@ -713,23 +706,23 @@ footer a:hover{color:var(--gold)}
   <p id="proj-error" style="display:none;color:var(--text-muted);font-size:12px;margin-top:1rem">Не удалось загрузить проекты. Проверьте доступ к таблице.</p>
 </section>
 
-<!-- MODAL GALLERY -->
-<div class="modal" id="modal" role="dialog" aria-label="Галерея проекта" aria-modal="true">
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-label="Галерея проекта">
   <div class="modal-header">
     <span class="modal-title" id="modal-title"></span>
     <button class="modal-close" aria-label="Закрыть">×</button>
   </div>
   <div class="modal-body">
-    <button class="modal-nav modal-prev" aria-label="Предыдущее изображение">‹</button>
+    <button class="modal-nav modal-prev" aria-label="Предыдущее">‹</button>
     <div class="modal-loader" id="modal-loader">Загрузка...</div>
     <img class="modal-img" id="modal-img" src="" alt="">
-    <button class="modal-nav modal-next" aria-label="Следующее изображение">›</button>
+    <button class="modal-nav modal-next" aria-label="Следующее">›</button>
     <span class="modal-counter" id="modal-counter"></span>
   </div>
   <div class="modal-footer" id="modal-thumbs"></div>
 </div>
 
-<!-- ABOUT -->
+<!-- ABOUT - полный текст восстановлен -->
 <section id="about">
   <div class="about-grid fade-in">
     <div class="about-img"><img id="about-company-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231a1a18'/%3E%3Ctext x='400' y='300' font-family='monospace' font-size='14' fill='%239a9890' text-anchor='middle'%3EФото компании%3C/text%3E%3C/svg%3E" alt="О компании"></div>
@@ -756,7 +749,7 @@ footer a:hover{color:var(--gold)}
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT - полные контакты восстановлены -->
 <section id="contact" class="contact-sec">
   <div class="contact-grid fade-in">
     <div>
@@ -769,4 +762,278 @@ footer a:hover{color:var(--gold)}
       <div class="cval">Ростов-на-Дону, ул. 19-Линия, д. 5 стр. 2</div>
       <div class="clabel">Телефон</div>
       <div class="cval"><a href="tel:+79054267206">+7 (905) 426-72-06</a></div>
-      <div class="
+      <div class="clabel">Telegram</div>
+      <div class="cval contact-telegram">
+        <a href="https://t.me/proinn_gip" target="_blank" rel="noopener noreferrer" class="telegram-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle">
+            <circle cx="12" cy="12" r="11" fill="#37AEE2"/>
+            <path d="M17.5 7.5L6.5 11.5L10.5 12.5L9.5 15.5L12.5 13.5L15.5 16.5L17.5 7.5Z" fill="white" stroke="white" stroke-width="0.3"/>
+          </svg>
+          @proinn_gip
+        </a>
+      </div>
+      <div class="clabel">Электронная почта</div>
+      <div class="cval"><a href="mailto:info@pro-inn.ru">info@pro-inn.ru</a></div>
+      <div class="clabel">Режим работы</div>
+      <div class="cval">Пн–Пт: 9:00 — 19:00</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 ПроектИнновации</span>
+  <span>Ростов-на-Дону</span>
+  <span style="display:flex;gap:1.5rem"><a href="https://t.me/proinn_gip" target="_blank" rel="noopener noreferrer">Telegram</a><a href="#" aria-label="Политика конфиденциальности">Политика конфиденциальности</a></span>
+</footer>
+
+<script>
+(function(){
+  const SHEET_ID = '15Huql1JK15ppK9KaQ8OFcg9zIPAJYgTBPQBm4cCq798';
+  const SHEET_NAME = 'Проекты';
+  const FALLBACK_IMG = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 600\'%3E%3Crect width=\'800\' height=\'600\' fill=\'%232a2a28\'/%3E%3Ctext x=\'400\' y=\'300\' font-family=\'monospace\' font-size=\'14\' fill=\'%239a9890\' text-anchor=\'middle\'%3EИзображение недоступно%3C/text%3E%3C/svg%3E';
+
+  let projects = [];
+  let curProject = 0, curImg = 0;
+
+  function imgUrl(id, size = 1200) {
+    if (!id || typeof id !== 'string') return FALLBACK_IMG;
+    const safeId = id.replace(/[^a-zA-Z0-9_-]/g, '');
+    if (!safeId) return FALLBACK_IMG;
+    return `https://drive.google.com/thumbnail?id=${safeId}&sz=w${size}`;
+  }
+
+  async function loadProjects() {
+    try {
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+      const res = await fetch(url);
+      const text = await res.text();
+      const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/);
+      if (!match) throw new Error('Invalid response');
+      const json = JSON.parse(match[1]);
+      const rows = json.table.rows;
+      projects = rows
+        .filter(r => r.c && r.c[0] && r.c[0].v)
+        .map(r => ({
+          name: r.c[0]?.v || '',
+          city: r.c[1]?.v || '',
+          category: r.c[2]?.v || '',
+          imgs: (r.c[3]?.v || '').split(',').map(s => s.trim()).filter(Boolean),
+          active: r.c[4]?.v !== false && r.c[4]?.v !== 'нет' && r.c[4]?.v !== 'false'
+        }))
+        .filter(p => p.active && p.imgs.length > 0);
+      renderProjects();
+    } catch(e) {
+      console.error('Ошибка загрузки проектов:', e);
+      const loadingEl = document.getElementById('proj-loading');
+      const errorEl = document.getElementById('proj-error');
+      if(loadingEl) loadingEl.style.display = 'none';
+      if(errorEl) errorEl.style.display = 'block';
+    }
+  }
+
+  function renderProjects() {
+    const loadingEl = document.getElementById('proj-loading');
+    const grid = document.getElementById('proj-grid');
+    
+    if(loadingEl) {
+      loadingEl.style.opacity = '0';
+      setTimeout(() => {
+        loadingEl.style.display = 'none';
+        if(grid) {
+          grid.style.display = 'grid';
+          grid.style.opacity = '0';
+          grid.innerHTML = projects.map((p, i) => `
+            <div class="proj-card" onclick="window.galleryOpen(${i})" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ') window.galleryOpen(${i})">
+              <div class="proj-img-wrap">
+                <img src="${imgUrl(p.imgs[0], 800)}" alt="${p.name}" loading="lazy"
+                  onerror="this.onerror=null; this.src='${p.imgs[1] ? imgUrl(p.imgs[1], 800) : FALLBACK_IMG}'; this.classList.add('error-placeholder')">
+              </div>
+              <div class="proj-info">
+                <div class="proj-cat">${escapeHtml(p.category)}</div>
+                <div class="proj-name">${escapeHtml(p.name)}</div>
+                <div class="proj-loc">${escapeHtml(p.city)}</div>
+              </div>
+            </div>
+          `).join('');
+          requestAnimationFrame(() => { if(grid) grid.style.opacity = '1'; });
+        }
+      }, 200);
+    }
+  }
+
+  function escapeHtml(str) {
+    if(!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if(m === '&') return '&amp;';
+      if(m === '<') return '&lt;';
+      if(m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  window.galleryOpen = function(idx) {
+    curProject = idx;
+    curImg = 0;
+    renderModal();
+    const modal = document.getElementById('modal');
+    if(modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeGallery = function() {
+    const modal = document.getElementById('modal');
+    if(modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  };
+
+  window.navGallery = function(dir) {
+    if(!projects[curProject]) return;
+    const imgs = projects[curProject].imgs;
+    curImg = (curImg + dir + imgs.length) % imgs.length;
+    renderModal();
+  };
+
+  window.setImg = function(idx) {
+    curImg = idx;
+    renderModal();
+  };
+
+  function renderModal() {
+    if(!projects[curProject]) return;
+    const p = projects[curProject];
+    const titleEl = document.getElementById('modal-title');
+    const imgEl = document.getElementById('modal-img');
+    const counterEl = document.getElementById('modal-counter');
+    const thumbsEl = document.getElementById('modal-thumbs');
+    const loader = document.getElementById('modal-loader');
+    
+    if(titleEl) titleEl.textContent = `${p.name} — ${p.city}`;
+    if(counterEl) counterEl.textContent = `${curImg + 1} / ${p.imgs.length}`;
+    
+    if(imgEl && loader) {
+      loader.style.display = 'block';
+      const imgUrlFull = imgUrl(p.imgs[curImg], 1200);
+      imgEl.src = imgUrlFull;
+      imgEl.onload = () => { if(loader) loader.style.display = 'none'; };
+      imgEl.onerror = () => {
+        if(loader) loader.style.display = 'none';
+        imgEl.src = FALLBACK_IMG;
+      };
+    }
+    
+    if(thumbsEl) {
+      thumbsEl.innerHTML = p.imgs.map((id, i) => `
+        <img class="thumb ${i === curImg ? 'active' : ''}" 
+             src="${imgUrl(id, 120)}" 
+             onclick="window.setImg(${i})" 
+             alt="Миниатюра ${i+1}"
+             loading="lazy">
+      `).join('');
+    }
+  }
+
+  async function loadAboutImage() {
+    try {
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('О компании')}`;
+      const res = await fetch(url);
+      const text = await res.text();
+      const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/);
+      if (match) {
+        const json = JSON.parse(match[1]);
+        const rows = json.table.rows;
+        if (rows && rows[0] && rows[0].c && rows[0].c[0] && rows[0].c[0].v) {
+          const fileId = rows[0].c[0].v.trim();
+          const imgEl = document.getElementById('about-company-img');
+          if(imgEl) {
+            imgEl.src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
+            imgEl.onerror = function() { this.src = FALLBACK_IMG; };
+          }
+        }
+      }
+    } catch(e) {
+      console.warn('Не удалось загрузить изображение о компании');
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function updateActiveNav() {
+    const sections = ['projects', 'about', 'services', 'contact'];
+    const scrollPos = window.scrollY + 100;
+    let current = '';
+    for(let s of sections) {
+      const section = document.getElementById(s);
+      if(section && section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+        current = s;
+        break;
+      }
+    }
+    document.querySelectorAll('[data-nav]').forEach(link => {
+      const href = link.getAttribute('href');
+      if(href && href === `#${current}`) link.classList.add('active');
+      else link.classList.remove('active');
+    });
+  }
+
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  if(burger && navLinks) {
+    burger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      burger.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    const modal = document.getElementById('modal');
+    if(modal && modal.classList.contains('open')) {
+      if(e.key === 'ArrowRight') { window.navGallery(1); e.preventDefault(); }
+      else if(e.key === 'ArrowLeft') { window.navGallery(-1); e.preventDefault(); }
+      else if(e.key === 'Escape') { window.closeGallery(); e.preventDefault(); }
+    }
+  });
+
+  const modalBg = document.getElementById('modal');
+  if(modalBg) {
+    modalBg.addEventListener('click', e => { if(e.target === modalBg) window.closeGallery(); });
+    const closeBtn = modalBg.querySelector('.modal-close');
+    if(closeBtn) closeBtn.addEventListener('click', window.closeGallery);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId && targetId !== '#') {
+        const target = document.querySelector(targetId);
+        if(target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  window.addEventListener('scroll', updateActiveNav);
+  updateActiveNav();
+  
+  loadProjects();
+  loadAboutImage();
+})();
+</script>
+</body>
+</html>
