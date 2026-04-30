@@ -50,7 +50,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 2.5rem
 
 /* Hero SVG logo block — centered in the hero */
 .hero-svg-logo{flex:1;display:flex;align-items:center;justify-content:center}
-.hero-svg-logo svg{width:clamp(260px,50vw,480px);height:auto}
+.hero-svg-logo svg{width:clamp(480px,80vw,900px);height:auto}
+@media(max-width:600px){.hero-svg-logo svg{width:100vw}}
 
 /* Hero image layer */
 .hero-img-wrap{position:absolute;inset:0;z-index:0}
@@ -226,7 +227,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
       alt="Архитектурный объект — ПроектИнновации"
       fetchpriority="high"
       loading="eager"
-      style="opacity:0;transition:opacity 0.8s ease">
+      style="opacity:0;transition:opacity 1s ease">
   </div>
 
   <!-- Контент поверх фото -->
@@ -516,6 +517,15 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     const imgEl = document.getElementById('hero-bg-img');
     if (!imgEl) return;
 
+    const showImg = (src) => {
+      imgEl.onload = () => {
+        imgEl.style.opacity = '1';
+        initHeroParallax(imgEl);
+      };
+      imgEl.onerror = () => { imgEl.style.opacity = '0'; };
+      imgEl.src = src;
+    };
+
     try {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Главная')}`;
       const res = await fetch(url);
@@ -526,32 +536,20 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
       if (rows && rows[0] && rows[0].c[0] && rows[0].c[0].v) {
         const fileId = rows[0].c[0].v.trim().replace(/[^a-zA-Z0-9_-]/g, '');
         if (!fileId) throw new Error('Пустой ID файла');
-
-        // Выбираем размер в зависимости от ширины экрана (Drive thumbnail API)
         const w = window.innerWidth;
         const size = w <= 480 ? 'w640' : w <= 1024 ? 'w1024' : 'w1920';
-        const src = `https://drive.google.com/thumbnail?id=${fileId}&sz=${size}`;
-
-        imgEl.onload = () => {
-          imgEl.style.opacity = '1';
-          // запускаем параллакс после загрузки
-          initHeroParallax(imgEl);
-        };
-        imgEl.onerror = () => {
-          console.warn('Hero: не удалось загрузить фото из Drive');
-          imgEl.style.opacity = '0';
-        };
-        imgEl.src = src;
+        showImg(`https://drive.google.com/thumbnail?id=${fileId}&sz=${size}`);
+      } else {
+        throw new Error('Нет данных в листе');
       }
     } catch(e) {
       console.warn('Hero: лист «Главная» не найден или недоступен.', e.message);
+      // Показываем архитектурное фото-заглушку пока лист не настроен
+      showImg('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80&auto=format&fit=crop');
     }
   }
 
   function initHeroParallax(imgEl) {
-    imgEl.addEventListener('load', () => {
-      imgEl.style.transform = 'scale(1)';
-    }, { once: true });
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
       if (scrolled < window.innerHeight) {
