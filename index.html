@@ -10,6 +10,7 @@
 <meta property="og:title" content="ПроектИнновации — Проектная компания">
 <meta property="og:description" content="Комплексное проектирование объектов жилого, общественного и производственного назначения">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://via.placeholder.com/1200x630?text=ProektInnovatsii">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -61,7 +62,7 @@ section{padding:5rem 2.5rem}
 .sec-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.8rem;padding-bottom:1rem;border-bottom:0.5px solid var(--line)}
 .sec-title{font-family:'Unbounded',sans-serif;font-weight:200;font-size:1.1rem}
 
-/* Projects grid - Ч/Б с цветом при наведении */
+/* Projects grid */
 .proj-loading, .proj-grid{transition:opacity 0.3s ease}
 .proj-loading{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
 .skel{background:linear-gradient(90deg,#1e1e1c 25%,#2a2a28 50%,#1e1e1c 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;height:360px}
@@ -71,9 +72,8 @@ section{padding:5rem 2.5rem}
 .proj-card{overflow:hidden;position:relative;background:#2a2a28;cursor:pointer;transition:transform 0.2s}
 .proj-card:active{transform:scale(0.98)}
 .proj-img-wrap{height:300px;overflow:hidden;position:relative;background:#1e1e1c}
-/* ОСНОВНЫЕ СТИЛИ ДЛЯ ЭФФЕКТА Ч/Б → ЦВЕТ */
-.proj-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s ease-in-out;filter:grayscale(100%) brightness(0.95)}
-.proj-card:hover img{transform:scale(1.04);filter:grayscale(0%) brightness(1)}
+.proj-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.3s;filter:brightness(0.95)}
+.proj-card:hover img{transform:scale(1.04);filter:brightness(1)}
 .proj-img-wrap img.error-placeholder{object-fit:contain;padding:20px;background:#141412}
 .proj-info{padding:1rem 1rem 0.8rem;background:var(--bg)}
 .proj-cat{font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
@@ -101,9 +101,9 @@ section{padding:5rem 2.5rem}
 .modal-counter{position:absolute;bottom:1rem;right:2rem;font-size:11px;letter-spacing:0.08em;color:rgba(248,246,241,0.3);font-family:'Unbounded',sans-serif;font-weight:200;z-index:3}
 
 /* About */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.about-img{width:100%;overflow:hidden;background:#2a2a28}
-.about-img img{width:100%;height:auto;display:block}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-img{height:480px;overflow:hidden;background:#2a2a28}
+.about-img img{width:100%;height:100%;object-fit:cover;display:block}
 .about-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
 .about-body{font-family:'Unbounded',sans-serif;font-weight:200;font-size:1.05rem;line-height:1.6;margin-bottom:1.8rem}
 .about-desc{color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:2rem}
@@ -144,8 +144,7 @@ footer a:hover{color:var(--gold)}
 @media(max-width:768px){
   .proj-grid,.proj-loading{grid-template-columns:1fr 1fr}
   .about-grid{grid-template-columns:1fr;gap:2rem}
-  .about-img{height:auto;max-height:400px}
-  .about-img img{height:auto;width:100%}
+  .about-img{height:320px}
   .srv-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr;gap:2rem}
   nav{padding:0 1.2rem}
@@ -166,35 +165,10 @@ footer a:hover{color:var(--gold)}
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 
-/* Accessibility */
+/* Accessibility focus styles */
 a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
-}
-/* Telegram link in contacts */
-.contact-telegram {
-    margin-top: 0.2rem;
-}
-
-.telegram-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: rgba(248, 246, 241, 0.8);
-    transition: color 0.2s, transform 0.2s;
-}
-
-.telegram-icon {
-    transition: transform 0.2s;
-}
-
-.telegram-link:hover {
-    color: var(--gold);
-}
-
-.telegram-link:hover .telegram-icon {
-    transform: translateY(-2px);
 }
 </style>
 </head>
@@ -211,56 +185,84 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   <button class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false">☰</button>
 </nav>
 
-<!-- HERO С ВАШЕЙ КАРТИНКОЙ И СОХРАНЕНИЕМ АНИМАЦИИ -->
+<!-- HERO -->
 <div class="hero">
-  <!-- Здесь ваша картинка -->
-  <img src="hero-bg.jpg" alt="ПроектИнновации фон" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
-
-  <!-- Анимированный слой поверх -->
-  <svg width="100%" height="100%" viewBox="0 0 680 382" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; z-index: 2; opacity: 0.4;">
-    <rect width="680" height="382" fill="transparent"/>
-    <g stroke="#b8a882" stroke-width="0.3" opacity="0.5">
-      <line x1="0" y1="60" x2="680" y2="60"/><line x1="0" y1="120" x2="680" y2="120"/>
-      <line x1="0" y1="180" x2="680" y2="180"/><line x1="0" y1="240" x2="680" y2="240"/>
-      <line x1="0" y1="300" x2="680" y2="300"/><line x1="0" y1="360" x2="680" y2="360"/>
-      <line x1="80" y1="0" x2="80" y2="382"/><line x1="160" y1="0" x2="160" y2="382"/>
-      <line x1="240" y1="0" x2="240" y2="382"/><line x1="320" y1="0" x2="320" y2="382"/>
-      <line x1="400" y1="0" x2="400" y2="382"/><line x1="480" y1="0" x2="480" y2="382"/>
-      <line x1="560" y1="0" x2="560" y2="382"/><line x1="640" y1="0" x2="640" y2="382"/>
-    </g>
-    <g transform="translate(312.5,136.5) scale(0.115)" opacity="0.7">
-      <rect class="s s0" x="43" y="30" width="14" height="440" fill="#b8a882"/>
-      <rect class="s s1" x="85" y="30" width="14" height="440" fill="#b8a882"/>
-      <rect class="s s2" x="43" y="30" width="56" height="14" fill="#b8a882"/>
-      <rect class="s s3" x="113" y="240" width="14" height="230" fill="#b8a882"/>
-      <rect class="s s4" x="113" y="240" width="56" height="14" fill="#b8a882"/>
-      <rect class="s s5" x="155" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s6" x="113" y="352" width="56" height="14" fill="#b8a882"/>
-      <rect class="s s7" x="183" y="240" width="56" height="14" fill="#b8a882"/>
-      <rect class="s s8" x="183" y="352" width="56" height="14" fill="#b8a882"/>
-      <rect class="s s9" x="183" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s10" x="225" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s11" x="253" y="30" width="14" height="440" fill="#F0EDE8"/>
-      <rect class="s s12" x="295" y="30" width="14" height="440" fill="#F0EDE8"/>
-      <polygon class="s s13" points="295,30 309,30 267,470 253,470" fill="#F0EDE8"/>
-      <rect class="s s14" x="295" y="30" width="14" height="32" fill="#F0EDE8"/>
-      <rect class="s s15" x="253" y="438" width="14" height="32" fill="#F0EDE8"/>
-      <rect class="s s16" x="323" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s17" x="365" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s18" x="323" y="289" width="56" height="14" fill="#b8a882"/>
-      <rect class="s s19" x="393" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s20" x="435" y="240" width="14" height="126" fill="#b8a882"/>
-      <rect class="s s21" x="393" y="289" width="56" height="14" fill="#b8a882"/>
-    </g>
-    <text class="logo-name" x="340" y="210" font-family="'Unbounded',sans-serif" font-weight="200" font-size="12" letter-spacing="6" fill="rgba(240,237,232,0.95)" text-anchor="middle">ПроектИнновации</text>
-    <g class="bot">
-      <line x1="0" y1="362" x2="680" y2="362" stroke="rgba(248,246,241,0.1)" stroke-width="0.5"/>
-      <text x="30" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(248,246,241,0.35)">ОСНОВАНА В 2013 ГОДУ</text>
-      <text x="650" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(248,246,241,0.35)" text-anchor="end">100+ РЕАЛИЗОВАННЫХ ПРОЕКТОВ</text>
-    </g>
-  </svg>
-</div>
+<svg width="100%" height="100%" viewBox="0 0 680 382" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Фоновый абстрактный рисунок">
+  <rect width="680" height="382" fill="#141412"/>
+  <g stroke="#1e1e1a" stroke-width="0.5">
+    <line x1="0" y1="60" x2="680" y2="60"/><line x1="0" y1="120" x2="680" y2="120"/>
+    <line x1="0" y1="180" x2="680" y2="180"/><line x1="0" y1="240" x2="680" y2="240"/>
+    <line x1="0" y1="300" x2="680" y2="300"/><line x1="0" y1="360" x2="680" y2="360"/>
+    <line x1="80" y1="0" x2="80" y2="382"/><line x1="160" y1="0" x2="160" y2="382"/>
+    <line x1="240" y1="0" x2="240" y2="382"/><line x1="320" y1="0" x2="320" y2="382"/>
+    <line x1="400" y1="0" x2="400" y2="382"/><line x1="480" y1="0" x2="480" y2="382"/>
+    <line x1="560" y1="0" x2="560" y2="382"/><line x1="640" y1="0" x2="640" y2="382"/>
+  </g>
+  <g stroke="#b8a882" stroke-width="0.4" opacity="0.1" fill="none">
+    <line x1="40" y1="382" x2="340" y2="0"/><line x1="640" y1="382" x2="340" y2="0"/><line x1="40" y1="0" x2="640" y2="382"/>
+  </g>
+  <rect x="20" y="180" width="18" height="202" fill="#1a1a16"/><rect x="42" y="150" width="22" height="232" fill="#1e1e1a"/>
+  <rect x="68" y="120" width="16" height="262" fill="#222220"/><rect x="88" y="160" width="20" height="222" fill="#1c1c18"/>
+  <rect x="112" y="100" width="14" height="282" fill="#202020"/><rect x="0" y="200" width="24" height="182" fill="#181816"/>
+  <rect x="130" y="140" width="28" height="242" fill="#1e1e1a"/><rect x="162" y="170" width="16" height="212" fill="#1a1a18"/>
+  <rect x="182" y="130" width="22" height="252" fill="#222220"/><rect x="208" y="80" width="20" height="302" fill="#252522"/>
+  <rect x="232" y="110" width="16" height="272" fill="#1e1e1a"/><rect x="252" y="60" width="24" height="322" fill="#282826"/>
+  <rect x="294" y="20" width="36" height="362" fill="#1e1e1c"/><rect x="304" y="10" width="16" height="372" fill="#222220"/>
+  <rect x="340" y="55" width="24" height="327" fill="#262624"/><rect x="368" y="90" width="16" height="292" fill="#1e1e1a"/>
+  <rect x="388" y="120" width="20" height="262" fill="#222220"/><rect x="412" y="145" width="22" height="237" fill="#1c1c18"/>
+  <rect x="438" y="115" width="18" height="267" fill="#202020"/><rect x="460" y="155" width="26" height="227" fill="#1e1e1a"/>
+  <rect x="490" y="130" width="16" height="252" fill="#1a1a18"/><rect x="510" y="165" width="20" height="217" fill="#222220"/>
+  <rect x="534" y="100" width="22" height="282" fill="#1e1e1a"/><rect x="560" y="175" width="18" height="207" fill="#1c1c18"/>
+  <rect x="582" y="140" width="24" height="242" fill="#202020"/><rect x="610" y="190" width="16" height="192" fill="#1a1a18"/>
+  <rect x="630" y="155" width="22" height="227" fill="#1e1e1a"/><rect x="656" y="170" width="24" height="212" fill="#1c1c18"/>
+  <g fill="#f0e8d8" opacity="0.55">
+    <rect x="298" y="30" width="5" height="4"/><rect x="308" y="30" width="5" height="4"/>
+    <rect x="298" y="42" width="5" height="4"/><rect x="308" y="54" width="5" height="4"/>
+    <rect x="298" y="66" width="5" height="4"/><rect x="308" y="78" width="5" height="4"/>
+  </g>
+  <g fill="#b8a882" opacity="0.2">
+    <rect x="213" y="90" width="4" height="3"/><rect x="213" y="104" width="4" height="3"/>
+    <rect x="257" y="70" width="5" height="4"/><rect x="345" y="65" width="4" height="3"/>
+    <rect x="439" y="125" width="4" height="3"/><rect x="72" y="130" width="4" height="3"/>
+  </g>
+  <line x1="0" y1="310" x2="680" y2="310" stroke="#b8a882" stroke-width="0.6" opacity="0.5"/>
+  <rect x="0" y="355" width="680" height="27" fill="#0e0e0c" opacity="0.8"/>
+  <rect x="0" y="0" width="680" height="40" fill="#141412" opacity="0.6"/>
+  <path d="M 180 382 Q 340 200 500 382" stroke="#b8a882" stroke-width="0.5" fill="none" opacity="0.15"/>
+  <g transform="translate(312.5,136.5) scale(0.115)">
+    <rect class="s s0" x="43" y="30" width="14" height="440" fill="#F0EDE8"/>
+    <rect class="s s1" x="85" y="30" width="14" height="440" fill="#F0EDE8"/>
+    <rect class="s s2" x="43" y="30" width="56" height="14" fill="#F0EDE8"/>
+    <rect class="s s3" x="113" y="240" width="14" height="230" fill="#F0EDE8"/>
+    <rect class="s s4" x="113" y="240" width="56" height="14" fill="#F0EDE8"/>
+    <rect class="s s5" x="155" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s6" x="113" y="352" width="56" height="14" fill="#F0EDE8"/>
+    <rect class="s s7" x="183" y="240" width="56" height="14" fill="#F0EDE8"/>
+    <rect class="s s8" x="183" y="352" width="56" height="14" fill="#F0EDE8"/>
+    <rect class="s s9" x="183" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s10" x="225" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s11" x="253" y="30" width="14" height="440" fill="#b8a882"/>
+    <rect class="s s12" x="295" y="30" width="14" height="440" fill="#b8a882"/>
+    <polygon class="s s13" points="295,30 309,30 267,470 253,470" fill="#b8a882"/>
+    <rect class="s s14" x="295" y="30" width="14" height="32" fill="#b8a882"/>
+    <rect class="s s15" x="253" y="438" width="14" height="32" fill="#b8a882"/>
+    <rect class="s s16" x="323" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s17" x="365" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s18" x="323" y="289" width="56" height="14" fill="#F0EDE8"/>
+    <rect class="s s19" x="393" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s20" x="435" y="240" width="14" height="126" fill="#F0EDE8"/>
+    <rect class="s s21" x="393" y="289" width="56" height="14" fill="#F0EDE8"/>
+  </g>
+  <text class="logo-name" x="340" y="210" font-family="'Unbounded',sans-serif" font-weight="200" font-size="11" letter-spacing="5" fill="rgba(240,237,232,0.9)" text-anchor="middle">ПроектИнновации</text>
   
+  <g class="bot">
+    <line x1="0" y1="362" x2="680" y2="362" stroke="rgba(248,246,241,0.08)" stroke-width="0.5"/>
+    <text x="30" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(248,246,241,0.28)">ОСНОВАНА В 2013 ГОДУ</text>
+    <text x="650" y="373" font-family="'Unbounded',sans-serif" font-weight="200" font-size="5" letter-spacing="2" fill="rgba(248,246,241,0.28)" text-anchor="end">100+ РЕАЛИЗОВАННЫХ ПРОЕКТОВ</text>
+  </g>
+</svg>
+</div>
+
 <div class="stats-bar fade-in">
   <div class="stat"><div class="stat-num">12</div><div class="stat-label">Лет опыта</div></div>
   <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Реализованных проектов</div></div>
@@ -268,7 +270,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="sec-header"><h2 class="sec-title">Проекты</h2></div>
+  <div class="sec-header"><h2 class="sec-title">Избранные проекты</h2></div>
   <div class="proj-loading" id="proj-loading">
     <div class="skel"></div><div class="skel"></div><div class="skel"></div>
     <div class="skel"></div><div class="skel"></div><div class="skel"></div>
@@ -301,8 +303,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     <div>
       <div class="about-label">О компании</div>
       <p class="about-body">Точное проектирование — от концепции до авторского надзора</p>
-      <p class="about-desc">Компания, основанная в 2013 году и предоставляющая полный спектр услуг с междисциплинарным взаимодействием в единой BIM-среде. Компетенции и опыт команды из архитекторов, конструкторов, инженеров и руководителей проектов позволили компании добиться высокого уровня в области генпроектирования, а нашим клиентам — экономить время и средства, достигая максимально эффективного результата на всех этапах реализации проекта. 
-      <p class="about-desc">За время существования на рынке нашей командой спроектировано более 100 объектов, в том числе промышленные, жилые и общественные комплексы, получившие признание как у профессионалов рынка, так и у жителей города. Кропотливая работа с командой клиента, объективная оценка технического задания на проектирование, применение современных научных разработок в области строительной климатологии, расчётных модулей для инженеров, конструкторов и архитекторов, оптимизация и соблюдение бюджета и сроков — это то, что позволяет нам разрабатывать качественный продукт, задающий новые стандарты качества.</p>
+      <p class="about-desc">Компания, основанная в 2013 году и предоставляющая полный спектр услуг с междисциплинарным взаимодействием в единой BIM-среде. Компетенции и опыт команды из архитекторов, конструкторов, инженеров и руководителей проектов позволили компании добиться высокого уровня в области генпроектирования, а нашим клиентам — экономить время и средства, достигая максимально эффективного результата на всех этапах реализации проекта. За время существования на рынке нашей командой спроектировано более 100 объектов, в том числе промышленные, жилые и общественные комплексы, получившие признание как у профессионалов рынка, так и у жителей города. Кропотливая работа с командой клиента, объективная оценка технического задания на проектирование, применение современных научных разработок в области строительной климатологии, расчётных модулей для инженеров, конструкторов и архитекторов, оптимизация и соблюдение бюджета и сроков — это то, что позволяет нам разрабатывать качественный продукт, задающий новые стандарты качества.</p>
       <p class="about-desc">Мы работаем на всех стадиях: от концепции и эскизного проекта до рабочей документации и авторского надзора за строительством.</p>
       <a class="btn" href="mailto:info@pro-inn.ru">Написать нам</a>
     </div>
@@ -328,28 +329,10 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
       <a class="btn-light" href="mailto:info@pro-inn.ru">Написать нам →</a>
     </div>
     <div>
-      <div class="clabel">Адрес</div>
-      <div class="cval">Ростов-на-Дону, ул. 19-Линия, д. 5 стр. 2</div>
-      
-      <div class="clabel">Телефон</div>
-      <div class="cval"><a href="tel:+79054267206">+7 (905) 426-72-06</a></div>
-      
-      <div class="clabel">Telegram</div>
-      <div class="cval contact-telegram">
-        <a href="https://t.me/proinn_gip" target="_blank" rel="noopener noreferrer" class="telegram-link">
-          <svg class="telegram-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="11" fill="#37AEE2"/>
-            <path d="M17.5 7.5L6.5 11.5L10.5 12.5L9.5 15.5L12.5 13.5L15.5 16.5L17.5 7.5Z" fill="white" stroke="white" stroke-width="0.3"/>
-          </svg>
-          @proinn_gip
-        </a>
-      </div>
-      
-      <div class="clabel">Электронная почта</div>
-      <div class="cval"><a href="mailto:info@pro-inn.ru">info@pro-inn.ru</a></div>
-      
-      <div class="clabel">Режим работы</div>
-      <div class="cval">Пн–Пт: 9:00 — 19:00</div>
+      <div class="clabel">Адрес</div><div class="cval">Ростов-на-Дону, ул. 19-Линия, д. 5 стр. 2</div>
+      <div class="clabel">Телефон</div><div class="cval"><a href="tel:+79054267206">+7 (905) 426-72-06</a></div>
+      <div class="clabel">Электронная почта</div><div class="cval"><a href="mailto:info@pro-inn.ru">info@pro-inn.ru</a></div>
+      <div class="clabel">Режим работы</div><div class="cval">Пн–Пт: 9:00 — 19:00</div>
     </div>
   </div>
 </section>
@@ -370,6 +353,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   let projects = [];
   let curProject = 0, curImg = 0;
 
+  // Safe image URL generator
   function imgUrl(id, size = 1200) {
     if (!id || typeof id !== 'string') return FALLBACK_IMG;
     const safeId = id.replace(/[^a-zA-Z0-9_-]/g, '');
@@ -377,6 +361,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     return `https://drive.google.com/thumbnail?id=${safeId}&sz=w${size}`;
   }
 
+  // Load projects from Google Sheets
   async function loadProjects() {
     try {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -404,6 +389,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
+  // Render projects grid
   function renderProjects() {
     const loadingEl = document.getElementById('proj-loading');
     const grid = document.getElementById('proj-grid');
@@ -434,6 +420,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
+  // Simple escape for XSS prevention
   function escapeHtml(str) {
     if(!str) return '';
     return str.replace(/[&<>]/g, function(m) {
@@ -444,6 +431,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     });
   }
 
+  // Gallery functions
   window.galleryOpen = function(idx) {
     curProject = idx;
     curImg = 0;
@@ -509,6 +497,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
+  // Load about image from separate sheet
   async function loadAboutImage() {
     try {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('О компании')}`;
@@ -529,6 +518,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     }
   }
 
+  // Intersection Observer for fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting) entry.target.classList.add('visible');
@@ -536,6 +526,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+  // Active navigation highlighting
   function updateActiveNav() {
     const sections = ['projects', 'about', 'services', 'contact'];
     const scrollPos = window.scrollY + 100;
@@ -554,6 +545,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     });
   }
 
+  // Burger menu
   const burger = document.getElementById('burgerBtn');
   const navLinks = document.getElementById('navLinks');
   if(burger && navLinks) {
@@ -561,6 +553,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
       const isOpen = navLinks.classList.toggle('open');
       burger.setAttribute('aria-expanded', isOpen);
     });
+    // Close menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -569,6 +562,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     });
   }
 
+  // Keyboard and modal event listeners
   document.addEventListener('keydown', e => {
     const modal = document.getElementById('modal');
     if(modal && modal.classList.contains('open')) {
@@ -585,6 +579,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
     if(closeBtn) closeBtn.addEventListener('click', window.closeGallery);
   }
 
+  // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -601,6 +596,7 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   window.addEventListener('scroll', updateActiveNav);
   updateActiveNav();
   
+  // Initialize
   loadProjects();
   loadAboutImage();
 })();
