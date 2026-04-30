@@ -55,7 +55,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 2.5rem
 
 /* Hero image layer */
 .hero-img-wrap{position:absolute;inset:0;z-index:0;background:#141412}
-.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;opacity:0;transition:opacity 1.2s ease;transform:scale(1.04)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:contain;object-position:center center;display:block;opacity:0;transition:opacity 1.2s ease;transform:scale(1.04)}
 .hero-img-wrap img.loaded{opacity:1}
 .hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,12,10,0.35) 0%,rgba(12,12,10,0.1) 40%,rgba(12,12,10,0.55) 80%,rgba(12,12,10,0.85) 100%)}
 
@@ -506,44 +506,46 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   }
 
   // ─── HERO IMAGE ───────────────────────────────────────────────────────────
-  // Лист «Главная» в Google Таблице, ячейка A1 — ID файла из Google Drive.
-  // Пример: https://drive.google.com/file/d/➡️ВОТ_ЭТО_ID⬅️/view
-  // Файл должен быть открыт «для всех по ссылке».
+  // По умолчанию грузит фото с ID ниже. Можно переопределить через лист
+  // «Главная» в таблице (ячейка A1 — ID файла из Google Drive).
   // ──────────────────────────────────────────────────────────────────────────
+  const DEFAULT_HERO_ID = '1SOTr9AeYzImWyNJX3ePlHBe7QKp8Getq';
+
   async function loadHeroImage() {
     const imgEl = document.getElementById('hero-bg-img');
     if (!imgEl) return;
 
-    const revealImg = () => {
-      imgEl.classList.add('loaded');
-      initHeroParallax(imgEl);
+    const heroUrl = (id) => {
+      const size = window.innerWidth <= 480 ? 'w800' : window.innerWidth <= 1024 ? 'w1200' : 'w1920';
+      return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`;
     };
 
     const tryLoad = (src) => new Promise((resolve, reject) => {
-      imgEl.onload  = () => resolve();
-      imgEl.onerror = () => reject(new Error('img load failed'));
+      imgEl.onload  = resolve;
+      imgEl.onerror = reject;
       imgEl.src = src;
     });
 
+    let fileId = DEFAULT_HERO_ID;
+
     try {
-      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Главная')}`;
+      const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Главная')}`;
       const res  = await fetch(url);
       const text = await res.text();
       const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
       const rows = json.table.rows;
+      if (rows?.[0]?.c?.[0]?.v) {
+        const id = rows[0].c[0].v.trim().replace(/[^a-zA-Z0-9_-]/g, '');
+        if (id) fileId = id;
+      }
+    } catch(_) { /* лист не настроен — используем DEFAULT_HERO_ID */ }
 
-      if (!rows || !rows[0] || !rows[0].c[0] || !rows[0].c[0].v) throw new Error('Нет ID в листе «Главная»');
-
-      const fileId = rows[0].c[0].v.trim().replace(/[^a-zA-Z0-9_-]/g, '');
-      if (!fileId) throw new Error('Пустой ID');
-
-      const w    = window.innerWidth;
-      const size = w <= 480 ? 'w800' : w <= 1024 ? 'w1200' : 'w1920';
-      await tryLoad(`https://drive.google.com/thumbnail?id=${fileId}&sz=${size}`);
-      revealImg();
+    try {
+      await tryLoad(heroUrl(fileId));
+      imgEl.classList.add('loaded');
+      initHeroParallax(imgEl);
     } catch(e) {
-      console.warn('Hero image:', e.message);
-      // Фон остаётся тёмным — логотип читается в любом случае
+      console.warn('Hero: не удалось загрузить фото', e);
     }
   }
 
