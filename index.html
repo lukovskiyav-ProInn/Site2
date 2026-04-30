@@ -1,3 +1,8 @@
+
+Удаление абстракции и белый фон
+Вот обновленный HTML-код, в котором убрана фоновая абстракция (сетка, линии и прямоугольники) на первом экране, а фон заменен на белый. Также были скорректированы цвета текста и логотипа для контраста с белым фоном.
+
+html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -627,6 +632,947 @@ a:focus-visible, button:focus-visible, .proj-card:focus-visible {
   loadProjects();
   loadAboutImage();
 })();
+</script>
+</body>
+</html>
+теперь сделай фоном на первой странице картинку, чтобы она была адаптирована для всех разрешений экранов, не обрезалась. Фон остальных страниц сделай темным. Полностью перепиши код.
+Вот полностью переписанный HTML-код, соответствующий вашему запросу. На первой странице (Hero-блок) установлена фоновая картинка, которая адаптируется и не обрезается. Для остальных страниц (секции) задан темный фон.
+
+html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ПроектИнновации | Архитектурное бюро Ростов-на-Дону</title>
+<meta name="description" content="Комплексное проектирование, BIM-моделирование, авторский надзор. 100+ проектов с 2013 года. Архитектурное бюро в Ростове-на-Дону.">
+<meta name="keywords" content="проектирование, архитектура, BIM, Ростов-на-Дону, авторский надзор, проектная компания">
+<meta name="author" content="ПроектИнновации">
+<meta property="og:title" content="ПроектИнновации — Проектная компания">
+<meta property="og:description" content="Комплексное проектирование объектов жилого, общественного и производственного назначения">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --dark-bg: #0a0a08;
+    --dark-surface: #121210;
+    --dark-card: #1a1a18;
+    --gold: #c4aa7a;
+    --gold-light: #d9c69e;
+    --text-light: #f0ebe3;
+    --text-muted: #9a9890;
+    --border-dim: rgba(240, 235, 227, 0.08);
+    --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    background: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 15px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* ----- HERO С ФОНОВОЙ КАРТИНКОЙ (АДАПТИВНО, БЕЗ ОБРЕЗКИ) ----- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 650px;
+    margin-top: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000; /* fallback */
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+    filter: brightness(0.75) contrast(1.05);
+    transition: transform 0.4s ease;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 860px;
+    padding: 2rem;
+    backdrop-filter: blur(2px);
+  }
+
+  .hero-badge {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: clamp(2rem, 7vw, 4.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+  }
+
+  .hero-title span {
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(255,250,240,0.85);
+    max-width: 580px;
+    margin: 1.2rem auto 0;
+    letter-spacing: 0.2px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ----- НАВИГАЦИЯ (ТЁМНАЯ) ----- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    height: 52px;
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10, 10, 8, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border-dim);
+  }
+
+  .nav-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--text-light);
+    transition: opacity 0.2s;
+  }
+
+  .nav-logo:hover {
+    opacity: 0.8;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-light);
+  }
+
+  .nav-links a.active {
+    color: var(--gold);
+  }
+
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
+  /* ----- СТАТИСТИКА ----- */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--dark-surface);
+    border-bottom: 0.5px solid var(--border-dim);
+  }
+
+  .stat {
+    padding: 1.8rem 2.5rem;
+    border-right: 0.5px solid var(--border-dim);
+  }
+
+  .stat:last-child {
+    border-right: none;
+  }
+
+  .stat-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 2.2rem;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ----- ОБЩИЕ СЕКЦИИ (ТЁМНЫЙ ФОН) ----- */
+  section {
+    padding: 5rem 2.5rem;
+    background: var(--dark-bg);
+  }
+
+  .sec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid var(--border-dim);
+  }
+
+  .sec-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ----- ПРОЕКТЫ (сетка, hover эффект) ----- */
+  .proj-loading, .proj-grid {
+    transition: opacity 0.3s;
+  }
+
+  .proj-loading {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .skel {
+    background: linear-gradient(90deg, #1c1c1a 25%, #2a2a28 50%, #1c1c1a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    height: 340px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    opacity: 0;
+  }
+
+  .proj-card {
+    overflow: hidden;
+    position: relative;
+    background: var(--dark-card);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .proj-card:active {
+    transform: scale(0.98);
+  }
+
+  .proj-img-wrap {
+    height: 280px;
+    overflow: hidden;
+    background: #151513;
+  }
+
+  .proj-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease, filter 0.4s ease;
+    filter: grayscale(100%) brightness(0.9);
+  }
+
+  .proj-card:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%) brightness(1);
+  }
+
+  .proj-info {
+    padding: 1rem 1rem 0.8rem;
+    background: var(--dark-surface);
+  }
+
+  .proj-cat {
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .proj-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .proj-loc {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ----- МОДАЛЬНОЕ ОКНО ГАЛЕРЕИ (тёмное) ----- */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.96);
+    flex-direction: column;
+  }
+
+  .modal.open {
+    display: flex;
+  }
+
+  .modal-header {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid rgba(255, 245, 235, 0.1);
+  }
+
+  .modal-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 0.9rem;
+    color: #e8e2d8;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: rgba(255, 245, 235, 0.6);
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover {
+    color: var(--gold);
+  }
+
+  .modal-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .modal-img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 2;
+  }
+
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(30, 30, 28, 0.7);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-nav:hover {
+    background: rgba(196, 170, 122, 0.6);
+  }
+
+  .modal-prev { left: 1.5rem; }
+  .modal-next { right: 1.5rem; }
+
+  .modal-footer {
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-top: 0.5px solid rgba(255, 245, 235, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .thumb {
+    width: 52px;
+    height: 36px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.5;
+    border: 1px solid transparent;
+    transition: 0.2s;
+  }
+
+  .thumb.active {
+    opacity: 1;
+    border-color: var(--gold);
+  }
+
+  /* ----- О КОМПАНИИ ----- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    filter: grayscale(20%);
+  }
+
+  .about-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-body {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-desc {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.6rem 1.8rem;
+    border: 0.5px solid var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--gold);
+    transition: all 0.25s;
+  }
+
+  .btn:hover {
+    background: var(--gold);
+    color: #0a0a08;
+  }
+
+  /* ----- УСЛУГИ ----- */
+  .srv-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-left: 0.5px solid var(--border-dim);
+  }
+
+  .srv {
+    padding: 2rem 1.6rem;
+    border-right: 0.5px solid var(--border-dim);
+    border-top: 0.5px solid var(--border-dim);
+    transition: background 0.2s;
+  }
+
+  .srv:hover {
+    background: rgba(196, 170, 122, 0.05);
+  }
+
+  .srv-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .srv-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .srv-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ----- КОНТАКТЫ (тёмная секция) ----- */
+  .contact-sec {
+    background: var(--dark-surface);
+    border-top: 0.5px solid var(--border-dim);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+
+  .contact-hl {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 2rem;
+  }
+
+  .btn-light {
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    border: 0.5px solid rgba(240, 235, 227, 0.3);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-light);
+    transition: 0.2s;
+  }
+
+  .btn-light:hover {
+    border-color: var(--gold);
+    background: rgba(196, 170, 122, 0.1);
+  }
+
+  .clabel {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .clabel:first-of-type {
+    margin-top: 0;
+  }
+
+  .cval {
+    font-size: 14px;
+    color: var(--text-light);
+  }
+
+  .cval a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 0.5px solid rgba(240, 235, 227, 0.2);
+  }
+
+  .cval a:hover {
+    border-bottom-color: var(--gold);
+  }
+
+  .telegram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-light);
+  }
+
+  .telegram-link:hover {
+    color: var(--gold);
+  }
+
+  /* ----- FOOTER ----- */
+  footer {
+    padding: 1.4rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--border-dim);
+    font-size: 11px;
+    color: var(--text-muted);
+    background: #070706;
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: var(--gold);
+  }
+
+  /* ----- АНИМАЦИИ ПОЯВЛЕНИЯ ----- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ----- АДАПТИВНОСТЬ ----- */
+  @media (max-width: 768px) {
+    nav {
+      padding: 0 1.2rem;
+    }
+    .nav-links {
+      position: fixed;
+      top: 52px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: rgba(10, 10, 8, 0.98);
+      backdrop-filter: blur(16px);
+      padding: 1.2rem 1.5rem;
+      gap: 1rem;
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: 0.25s;
+      pointer-events: none;
+      border-bottom: 0.5px solid var(--border-dim);
+    }
+    .nav-links.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .burger {
+      display: block;
+    }
+    .proj-grid, .proj-loading {
+      grid-template-columns: 1fr 1fr;
+    }
+    .about-grid, .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .srv-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    section {
+      padding: 3rem 1.2rem;
+    }
+    .stats-bar .stat {
+      padding: 1.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .proj-grid, .proj-loading {
+      grid-template-columns: 1fr;
+    }
+    .srv-grid {
+      grid-template-columns: 1fr;
+    }
+    .stats-bar {
+      grid-template-columns: 1fr;
+    }
+    .stat {
+      border-right: none;
+      border-bottom: 0.5px solid var(--border-dim);
+    }
+    .modal-nav {
+      width: 36px;
+      height: 36px;
+    }
+    footer {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">ПроектИнновации</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#projects" data-nav>Проекты</a></li>
+    <li><a href="#about" data-nav>О нас</a></li>
+    <li><a href="#services" data-nav>Услуги</a></li>
+    <li><a href="#contact" data-nav>Контакты</a></li>
+  </ul>
+  <button class="burger" id="burgerBtn" aria-label="Меню">☰</button>
+</nav>
+
+<!-- HERO С ФОНОВОЙ КАРТИНКОЙ (адаптивная, без обрезки) -->
+<div class="hero">
+  <img class="hero-bg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop" alt="Архитектурный фон современное строительство" crossorigin="anonymous">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Архитектура • Проектирование • BIM</div>
+    <h1 class="hero-title">Создаём пространства, где <span>идеи обретают форму</span></h1>
+    <p class="hero-desc">Комплексное проектирование, авторский надзор и BIM-моделирование. 12 лет экспертизы, 100+ проектов по всей России.</p>
+  </div>
+</div>
+
+<div class="stats-bar fade-in">
+  <div class="stat"><div class="stat-num">12</div><div class="stat-label">Лет опыта</div></div>
+  <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Реализованных проектов</div></div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-header"><h2 class="sec-title">Проекты</h2></div>
+  <div class="proj-loading" id="proj-loading">
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+  </div>
+  <div class="proj-grid" id="proj-grid" style="display:none"></div>
+  <p id="proj-error" style="display:none;color:var(--text-muted);font-size:12px;margin-top:1rem">Не удалось загрузить проекты. Проверьте подключение к таблице.</p>
+</section>
+
+<!-- MODAL GALLERY -->
+<div class="modal" id="modal" role="dialog" aria-label="Галерея">
+  <div class="modal-header"><span class="modal-title" id="modal-title"></span><button class="modal-close" aria-label="Закрыть">✕</button></div>
+  <div class="modal-body">
+    <button class="modal-nav modal-prev" aria-label="Предыдущее">‹</button>
+    <img class="modal-img" id="modal-img" alt="Изображение проекта">
+    <button class="modal-nav modal-next" aria-label="Следующее">›</button>
+  </div>
+  <div class="modal-footer" id="modal-thumbs"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--dark-bg)">
+  <div class="about-grid fade-in">
+    <div class="about-img"><img id="about-company-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231a1a18'/%3E%3Ctext x='400' y='300' font-family='monospace' font-size='14' fill='%239a9890' text-anchor='middle'%3EПроектная мастерская%3C/text%3E%3C/svg%3E" alt="О компании"></div>
+    <div><div class="about-label">О компании</div><p class="about-body">Точное проектирование — от концепции до авторского надзора</p><p class="about-desc">Основана в 2013 году, объединяя архитекторов, конструкторов и BIM-инженеров. Мы работаем в единой цифровой среде, что гарантирует точность и скорость. Более 100 реализованных объектов: жилые комплексы, общественные пространства, промышленные здания.</p><p class="about-desc">Индивидуальный подход, контроль бюджета и сроков, научный подход к климатологии и инженерным расчётам позволяют нам создавать проекты, задающие стандарты качества на юге России.</p><a class="btn" href="mailto:info@pro-inn.ru">Написать нам</a></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-header"><h2 class="sec-title">Услуги</h2></div>
+  <div class="srv-grid fade-in">
+    <div class="srv"><div class="srv-num">01</div><div class="srv-title">Комплексное проектирование</div><div class="srv-desc">Жилые, общественные, производственные объекты — полный цикл: от эскиза до рабочей документации.</div></div>
+    <div class="srv"><div class="srv-num">02</div><div class="srv-title">BIM-моделирование</div><div class="srv-desc">Информационные модели, экспертиза, коллизии, визуализация и управление данными.</div></div>
+    <div class="srv"><div class="srv-num">03</div><div class="srv-title">Градостроительный анализ</div><div class="srv-desc">Оценка участка, генеральный план, контекст и прединвестиционные исследования.</div></div>
+    <div class="srv"><div class="srv-num">04</div><div class="srv-title">Авторский надзор</div><div class="srv-desc">Сопровождение строительства, контроль соответствия проекту, field-решения.</div></div>
+    <div class="srv"><div class="srv-num">05</div><div class="srv-title">Интерьеры и среда</div><div class="srv-desc">Дизайн интерьеров, благоустройство, элементы городской среды и навигация.</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-sec">
+  <div class="contact-grid fade-in">
+    <div><h2 class="contact-hl">Давайте обсудим ваш проект</h2><p class="contact-desc">Напишите или позвоните — ответим в течение одного рабочего дня, подготовим коммерческое предложение и встретимся в офисе или на объекте.</p><a class="btn-light" href="mailto:info@pro-inn.ru">Написать нам →</a></div>
+    <div><div class="clabel">Адрес</div><div class="cval">Ростов-на-Дону, ул. 19-Линия, д. 5 стр. 2</div><div class="clabel">Телефон</div><div class="cval"><a href="tel:+79054267206">+7 (905) 426-72-06</a></div><div class="clabel">Telegram</div><div class="cval"><a href="https://t.me/proinn_gip" target="_blank" class="telegram-link">📱 @proinn_gip</a></div><div class="clabel">Электронная почта</div><div class="cval"><a href="mailto:info@pro-inn.ru">info@pro-inn.ru</a></div><div class="clabel">Режим работы</div><div class="cval">Пн–Пт: 9:00 — 19:00</div></div>
+  </div>
+</section>
+
+<footer><span>© 2025 ПроектИнновации</span><span>Ростов-на-Дону</span><span><a href="https://t.me/proinn_gip" target="_blank">Telegram</a>  <a href="#" style="margin-left:1rem">Политика конфиденциальности</a></span></footer>
+
+<script>
+  (function(){
+    // --- GOOGLE SHEETS CONFIG (без изменений) ---
+    const SHEET_ID = '15Huql1JK15ppK9KaQ8OFcg9zIPAJYgTBPQBm4cCq798';
+    const SHEET_NAME = 'Проекты';
+    const FALLBACK_IMG = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 600\'%3E%3Crect width=\'800\' height=\'600\' fill=\'%232a2a28\'/%3E%3Ctext x=\'400\' y=\'300\' font-family=\'monospace\' font-size=\'14\' fill=\'%239a9890\' text-anchor=\'middle\'%3Eизображение проекта%3C/text%3E%3C/svg%3E';
+    
+    let projects = [];
+    let curProject = 0, curImg = 0;
+
+    function imgUrl(id, size = 800) {
+      if (!id || typeof id !== 'string') return FALLBACK_IMG;
+      const safe = id.replace(/[^a-zA-Z0-9_-]/g, '');
+      if(!safe) return FALLBACK_IMG;
+      return `https://drive.google.com/thumbnail?id=${safe}&sz=w${size}`;
+    }
+
+    async function loadProjects() {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+        const res = await fetch(url);
+        const text = await res.text();
+        const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+        const rows = json.table.rows;
+        projects = rows.filter(r => r.c[0] && r.c[0].v).map(r => ({
+          name: r.c[0]?.v || '',
+          city: r.c[1]?.v || '',
+          category: r.c[2]?.v || '',
+          imgs: (r.c[3]?.v || '').split(',').map(s => s.trim()).filter(Boolean),
+          active: r.c[4]?.v !== false && r.c[4]?.v !== 'нет'
+        })).filter(p => p.active && p.imgs.length);
+        renderProjects();
+      } catch(e) {
+        document.getElementById('proj-loading').style.display = 'none';
+        document.getElementById('proj-error').style.display = 'block';
+      }
+    }
+
+    function renderProjects() {
+      const loadingEl = document.getElementById('proj-loading');
+      const grid = document.getElementById('proj-grid');
+      if(loadingEl) {
+        loadingEl.style.opacity = '0';
+        setTimeout(() => {
+          loadingEl.style.display = 'none';
+          if(grid) {
+            grid.style.display = 'grid';
+            grid.innerHTML = projects.map((p, i) => `
+              <div class="proj-card" onclick="window.galleryOpen(${i})" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ') window.galleryOpen(${i})">
+                <div class="proj-img-wrap"><img src="${imgUrl(p.imgs[0], 800)}" alt="${p.name}" loading="lazy" onerror="this.src='${p.imgs[1] ? imgUrl(p.imgs[1], 800) : FALLBACK_IMG}'; this.classList.add('error-placeholder')"></div>
+                <div class="proj-info"><div class="proj-cat">${escapeHtml(p.category)}</div><div class="proj-name">${escapeHtml(p.name)}</div><div class="proj-loc">${escapeHtml(p.city)}</div></div>
+              </div>`).join('');
+            requestAnimationFrame(() => grid.style.opacity = '1');
+          }
+        }, 180);
+      }
+    }
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    
+    window.galleryOpen = function(idx) { curProject = idx; curImg = 0; renderModal(); document.getElementById('modal').classList.add('open'); document.body.style.overflow = 'hidden'; };
+    window.closeGallery = function() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; };
+    window.navGallery = function(dir) { let imgs = projects[curProject]?.imgs; if(imgs) { curImg = (curImg + dir + imgs.length) % imgs.length; renderModal(); } };
+    window.setImg = function(idx) { curImg = idx; renderModal(); };
+    
+    function renderModal() {
+      if(!projects[curProject]) return;
+      const p = projects[curProject];
+      document.getElementById('modal-title').innerText = `${p.name} — ${p.city}`;
+      const imgEl = document.getElementById('modal-img');
+      imgEl.src = imgUrl(p.imgs[curImg], 1200);
+      imgEl.onerror = () => imgEl.src = FALLBACK_IMG;
+      document.getElementById('modal-thumbs').innerHTML = p.imgs.map((id,i) => `<img class="thumb ${i===curImg ? 'active':''}" src="${imgUrl(id,120)}" onclick="window.setImg(${i})" alt="thumb">`).join('');
+    }
+    
+    async function loadAboutImage() {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('О компании')}`;
+        const res = await fetch(url);
+        const text = await res.text();
+        const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+        if(json.table.rows[0]?.c[0]?.v) {
+          const fileId = json.table.rows[0].c[0].v.trim();
+          const img = document.getElementById('about-company-img');
+          if(img) img.src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
+        }
+      } catch(e) {}
+    }
+
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    
+    // навигация active + burger
+    function updateActiveNav() {
+      const sections = ['projects','about','services','contact'];
+      const scrollPos = window.scrollY + 100;
+      let current = '';
+      for(let s of sections) { let el = document.getElementById(s); if(el && el.offsetTop <= scrollPos && el.offsetTop+el.offsetHeight > scrollPos) { current = s; break; } }
+      document.querySelectorAll('[data-nav]').forEach(link => { let href = link.getAttribute('href'); if(href === `#${current}`) link.classList.add('active'); else link.classList.remove('active'); });
+    }
+    const burger = document.getElementById('burgerBtn'), navLinks = document.getElementById('navLinks');
+    if(burger) burger.addEventListener('click', () => { navLinks.classList.toggle('open'); burger.setAttribute('aria-expanded', navLinks.classList.contains('open')); });
+    document.querySelectorAll('#navLinks a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+    document.addEventListener('keydown', e => { if(document.getElementById('modal').classList.contains('open')) { if(e.key === 'ArrowRight') { window.navGallery(1); e.preventDefault(); } else if(e.key === 'ArrowLeft') { window.navGallery(-1); e.preventDefault(); } else if(e.key === 'Escape') { window.closeGallery(); e.preventDefault(); } } });
+    document.getElementById('modal').addEventListener('click', e => { if(e.target === document.getElementById('modal')) window.closeGallery(); });
+    document.querySelector('.modal-close')?.addEventListener('click', window.closeGallery);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', function(e) { let target = document.querySelector(this.getAttribute('href')); if(target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth' }); } }));
+    window.addEventListener('scroll', updateActiveNav); updateActiveNav();
+    loadProjects(); loadAboutImage();
+  })();
 </script>
 </body>
 </html>
